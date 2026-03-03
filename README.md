@@ -27,7 +27,7 @@ gem install wsocket-io
 ```ruby
 require 'wsocket_io'
 
-client = WSocketIO::Client.new('wss://your-server.com', 'your-api-key')
+client = WSocketIO::Client.new('wss://node00.wsocket.online', 'your-api-key')
 
 client.on_connect { puts 'Connected!' }
 
@@ -78,7 +78,7 @@ end
 
 ```ruby
 push = WSocketIO::PushClient.new(
-  base_url: 'https://your-server.com',
+  base_url: 'https://node00.wsocket.online',
   token: 'secret',
   app_id: 'app1'
 )
