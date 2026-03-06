@@ -1,6 +1,9 @@
 # wSocket SDK for Ruby
 
-Official Ruby SDK for wSocket — realtime pub/sub, presence, history, and push notifications.
+Official Ruby SDK for [wSocket](https://wsocket.io) — realtime pub/sub, presence, history, and push notifications.
+
+[![Gem Version](https://badge.fury.io/rb/wsocket-io.svg)](https://rubygems.org/gems/wsocket-io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Installation
 
