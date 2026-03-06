@@ -1,0 +1,25 @@
+name: Publish to RubyGems
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      - name: Build gem
+        run: gem build wsocket-io.gemspec
+      - name: Publish to RubyGems
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem push wsocket-io-*.gem
+        env:
+          GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}

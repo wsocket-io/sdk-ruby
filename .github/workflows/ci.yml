@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: ['3.0', '3.1', '3.2', '3.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: false
+      - run: gem install bundler
+      - run: gem build wsocket-io.gemspec
+      - run: gem install wsocket-io-*.gem
+      - name: Validate gem
+        run: ruby -e "require 'wsocket_io'; puts 'Gem loaded successfully'"
