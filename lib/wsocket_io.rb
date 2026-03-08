@@ -218,6 +218,34 @@ module WSocketIO
       Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') { |http| http.request(req) }
     end
 
+    def add_channel(member_id, channel:)
+      post('channels/add', { memberId: member_id, channel: channel })
+    end
+
+    def remove_channel(member_id, channel:)
+      post('channels/remove', { memberId: member_id, channel: channel })
+    end
+
+    def get_vapid_key
+      uri = URI("#{@base_url}/api/push/vapid-key")
+      req = Net::HTTP::Get.new(uri, headers)
+      resp = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') { |http| http.request(req) }
+      data = JSON.parse(resp.body)
+      data['vapidPublicKey']
+    end
+
+    def list_subscriptions(member_id: nil, platform: nil, limit: nil)
+      params = []
+      params << "memberId=#{member_id}" if member_id
+      params << "platform=#{platform}" if platform
+      params << "limit=#{limit}" if limit
+      qs = params.any? ? "?#{params.join('&')}" : ''
+      uri = URI("#{@base_url}/api/push/subscriptions#{qs}")
+      req = Net::HTTP::Get.new(uri, headers)
+      resp = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') { |http| http.request(req) }
+      JSON.parse(resp.body)
+    end
+
     private
 
     def headers
