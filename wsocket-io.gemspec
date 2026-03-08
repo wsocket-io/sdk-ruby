@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'wsocket-io'
-  s.version     = '0.1.0'
+  s.version     = '0.2.0'
   s.summary     = 'wSocket SDK for Ruby'
   s.description = 'Official Ruby SDK for wSocket — realtime pub/sub, presence, history, and push notifications.'
   s.authors     = ['wSocket']

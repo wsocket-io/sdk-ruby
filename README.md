@@ -97,6 +97,16 @@ push.send_to_member('user-123', payload: {
 
 # Broadcast
 push.broadcast(payload: { title: 'Announcement', body: 'Server update' })
+
+# Channel targeting
+push.add_channel('subscription-id', 'alerts')
+push.remove_channel('subscription-id', 'alerts')
+
+# VAPID key
+vapid_key = push.get_vapid_key
+
+# List subscriptions
+subs = push.list_subscriptions('user-123')
 ```
 
 ## Requirements
