@@ -212,6 +212,12 @@ module WSocketIO
       Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') { |http| http.request(req) }
     end
 
+    def delete_subscription(subscription_id)
+      uri = URI("#{@base_url}/api/push/subscriptions/#{subscription_id}")
+      req = Net::HTTP::Delete.new(uri, headers)
+      Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') { |http| http.request(req) }
+    end
+
     private
 
     def headers
